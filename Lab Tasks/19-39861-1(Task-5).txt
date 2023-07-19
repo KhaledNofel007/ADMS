@@ -1,0 +1,82 @@
+#Creating Student Table
+Create table Student(
+S_Id number(4),S_Name varchar2(20),S_CGPA Float,S_BloodStatus varchar2(20),H_No number(4),
+CONSTRAINT pk1 PRIMARY KEY (S_Id)
+);
+#Inserting data into Student table
+
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('2','Harry','3.45','Halfblood','11');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('7','Ron','3.01','Pureblood','11');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('12','Hannah',Null,'Pureblood','22');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('17','Cedric','3.78','Pureblood','22');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('22','Cho','3.55','Muggleborn','33');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values 
+('27','Luna','2.89',Null,'11');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('32','Draco','3.88','Pureblood','44');
+Insert INTO Student(S_Id,S_Name,S_CGPA,S_BloodStatus,H_No) values ('37','Goyle','2.10','Pureblood','44');
+
+#Creating Student Table
+
+Create table House(
+H_Id number(4),H_Name varchar2(20),H_Points number(4),CONSTRAINT pk2 PRIMARY KEY (H_Id));
+
+#Inserting data into Student table
+Insert INTO House(H_Id,H_Name,H_Points) values ('11','Gryffindor','892');
+Insert INTO House(H_Id,H_Name,H_Points) values ('22','Hufflepuf','785');
+Insert INTO House(H_Id,H_Name,H_Points) values ('33','Ravenclaw','789');
+Insert INTO House(H_Id,H_Name,H_Points) values ('44','Slytherin','850');
+
+1.Increase the cgpa of all students by 0.05 
+=
+SELECT S_Name, S_CGPA, S_CGPA+0.005
+FROM	Student;
+2.Display the student name and their cgpa under 1 column
+=
+SELECT  S_Name || S_CGPA AS "CGPA"
+FROM  Student;
+3.Display S_Name as Name and S_CGPA as CGPA
+=
+SELECT S_Name AS name, S_CGPA CGPA 
+FROM   Student;
+4.Display the student name, those who have a C at the first of their name
+=
+SELECT	S_Name 
+FROM 	Student
+WHERE	S_Name LIKE 'C%';
+5.Display the student name who has no data of their CGPA
+=
+SELECT  S_Name , S_CGPA 
+FROM    Student
+WHERE   S_CGPA IS NULL;
+6.Reorder to ascending order the house name by their H_Points
+=
+SELECT  H_Id ,H_Name, H_Points
+FROM    House
+ORDER BY H_Points;
+7.Use SUBSTR function and manupulate the characters of student name
+=
+SELECT S_Name , CONCAT (S_Name , S_BloodStatus), LENGTH(S_Name ),
+INSTR(S_Name , 'o')
+FROM   Student
+WHERE SUBSTR(S_BloodStatus,1,5) = 'BloodStatus';
+8.Calculate the Housepoint by multiplying with 10 and adding their corresponding H_Id, then display the H_Name, H_Points,H_Id
+=
+SELECT H_Name, H_Points, H_Id , (H_Points*10)+NVL(H_Id ,0)
+FROM   House;
+9.Display the avg, min, max, and sum of H_Points, those whose house points start with the numeric character 7
+=
+SELECT	AVG(H_Points), MAX(H_Points),
+        MIN(H_Points), SUM(H_Points)
+FROM	House
+WHERE	H_Points LIKE '7%';
+10.Display the maximum cgpa of the students by grouping their house number
+=
+SELECT   H_No, max(S_CGPA)
+FROM     Student
+GROUP BY H_No;
+11.Display the greater average cgpa than 3.5 of the students by grouping their house number
+=
+SELECT   H_No, AVG(S_CGPA)
+FROM     Student
+GROUP BY H_No;
+HAVING	AVG(S_CGPA) > 3.5;

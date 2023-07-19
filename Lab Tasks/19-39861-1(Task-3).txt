@@ -1,0 +1,16 @@
+Change the table name member to members.
+Rename <member> to <members>;
+Display the member name who pay the highest bill
+Select n_name from member where salary = 800;
+Display only those member names whose name start with the letter A. 
+Select m_name from Member where m_name Like ‘A%’;
+Write a query to display member name, address whose trainer name Prioty
+ Select m_name,m_address from member where t_id = 3;
+Create a view named trainer_vw based on trainer table which shows the trainer id, name, specialty
+ CREATE VIEW trainer vw
+AS SELECT t_id,t_name,speciality 
+From Trainer
+using your view trainer_vw display all trainer names and specialty.
+Select t_name ,speciality from trainer vw;
+Display the member name by the ascending order of their bill payment.
+Select m_name from member,bill from member order by bill ASC;

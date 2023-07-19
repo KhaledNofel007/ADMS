@@ -1,0 +1,176 @@
+UNF
+Relate(l_name, owner_id, relationship, email, phone_no, gender, serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, road_no, city, house_no, c_name )
+
+1NF
+Phone number is a multi valued attribute.
+owner_name, owner_id, relationship, email, phone_no, gender, serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, road_no, city, house_no, c_name
+2NF
+Owner_id, owner_name, relationship, email, phone_no, gender, serial_no,  zip_code, road_no, city, house_no, zip_code, road_no, city, house_no
+ Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, road_no, city, house_no, c_name,  zip_code, road_no, city, house_no, c_name
+3NF
+Serial_no, owner_name, relationship, email, phone_no, gender,  zip_code
+ Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code
+zip_code, road_no, city, house_no, c_name
+Table Creation: 
+owner_id, owner_name, relationship, email, phone_no, gender,  zip_code
+ Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, owner_id
+zip_code, road_no, city, house_no, c_name
+
+
+UNF
+Buried(Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, road_no, city, house_no, c_name,  zip_code, road_no, city, house_no, c_name,  location, land_code, size)
+1NF
+There is no multi valued attribute. Relation already in 1NF
+
+2NF
+Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, road_no, city, house_no, c_name,  zip_code, road_no, city, house_no, c_name
+Land_code, location, size
+
+3NF
+Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, land_code
+zip_code, road_no, city, house_no, c_name
+Land_code, location, size
+UNF
+work(Land_code, location, size, id_no, join_date, name, salary, designation, phone_num, email, gender, road_no, zip_code, house_no, city)
+
+1NF
+Phone number is a multi valued attribute.
+Land_code, location, size, id_no, join_date, name, salary, designation, phone_num, email, gender, road_no, zip_code, house_no, city
+2NF
+id_no, join_date, name, salary, designation, phone_num, email, gender, road_no, zip_code, house_no, city
+Land_code, location, size
+3NF
+id_no, join_date, name, salary, designation, phone_num, email, gender
+road_no, zip_code, house_no, city
+Land_code, location, size
+Table creation:
+id_no, join_date, name, salary, designation, phone_num, email, gender, zip_code, land_ocde
+road_no, zip_code, house_no, city
+Land_code, location, size
+
+UNF
+Buy(Owner_id, owner_name, relationship, email, phone_no, gender, serial_no,  zip_code, road_no, city, house_no, zip_code, road_no, city, house_no, Land_code, location, size)
+1NF
+Phone number is a multi valued attribute.
+Owner_id, owner_name, relationship, email, phone_no, gender, serial_no,  zip_code, road_no, city, house_no, zip_code, road_no, city, house_no, Land_code, location, size
+2NF
+Owner_id, owner_name, relationship, email, phone_no, gender, serial_no,  zip_code, road_no, city, house_no, zip_code, road_no, city, house_no
+Land_code, location, size
+3NF
+owner_id, owner_name, relationship, email, phone_no, gender,  zip_code, land_code
+Land_code, location, size
+zip_code, road_no, city, house_no,
+
+Final Table
+Serial_no, name, father_name, mother_name, age, dob, dod, cause_of_deate, gender, zip_code, owner_id, land_code
+owner_id, owner_name, relationship, email, gender,  zip_code, land_code, num_id
+id_no, join_date, name, salary, designation, phone_num, email, gender, zip_code, land_code, num_id
+zip_code, road_no, city, house_no,
+Land_code, location, size
+Num_id, phone_no
+
+
+CREATE TABLE Corpse (
+    Serial_no int NOT NULL PRIMARY KEY,
+    c_name varchar(255) NOT NULL,
+    c_age int NOT NULL,
+    father_name varchar(255),
+    mother_name varchar(255),
+    dob varchar(255),
+    dod varchar(255) NOT NULL,
+    cause_of_deate varchar(255) NOT NULL,
+    gender varchar(255),
+    zip_code int NOT NULL,
+    land_code int,
+    owner_id int
+);
+INSERT INTO Corpse (Serial_no, c_name, c_age, father_name, mother_name, dob, dod, cause_of_deate, gender, zip_code, land_code, owner_id)
+VALUES (1, 'Saykat', 27, 'Akkash', 'Akhi', '10-20-1999', '10-20-2022', 'Corona', 'Male', 1, 1, 1);
+
+INSERT INTO Corpse (Serial_no, c_name, c_age, father_name, mother_name, dob, dod, cause_of_deate, gender, zip_code, land_code, owner_id)
+VALUES (2, 'Sakil', 27, 'Loitta', 'Loti', '10-20-1999', '10-20-2022', 'Corona', 'Male', 2, 2, 2);
+
+INSERT INTO Corpse (Serial_no, c_name, c_age, father_name, mother_name, dob, dod, cause_of_deate, gender, zip_code, land_code, owner_id)
+VALUES (3, 'Dulona', 27, 'Loitta', 'Loti', '10-20-1999', '10-20-2022', 'Corona', 'Female', 3, 3, 3);
+
+CREATE TABLE Owner(
+    owner_id int NOT NULL PRIMARY KEY,
+    owner_name varchar(255) NOT NULL,
+    relationship varchar(255),
+    email varchar(255),
+    gender varchar(255),
+    zip_code int, land_code int,
+    num_id int
+);
+
+INSERT INTO Owner(owner_id, owner_name, relationship, email, gender,  zip_code, land_code, num_id)
+VALUES(1, 'Anamul', 'Borther', 'anam@some.com', 'Male', 1, 1, 1)
+
+INSERT INTO Owner(owner_id, owner_name, relationship, email, gender,  zip_code, land_code, num_id)
+VALUES(2, 'Sakib', 'Father', 'sakib@some.com', 'Male', 2, 2, 2)
+
+INSERT INTO Owner(owner_id, owner_name, relationship, email, gender,  zip_code, land_code, num_id)
+VALUES(3, 'Samsul', 'Father', 'sam@some.com', 'Male', 3, 3, 3)
+
+CREATE TABLE Employee(
+    emp_id int NOT NULL PRIMARY KEY,
+    join_date varchar(255) NOT NULL,
+    emp_name varchar(255) NOT NULL,
+    salary int,
+    designation varchar(255),
+    email varchar(255),
+    gender varchar(),
+    zip_code int, 
+    land_code int,
+    num_id int
+);
+
+INSERT INTO Employee(emp_id, join_date, emp_name, salary, designation, email, gender, zip_code, land_code, num_id)
+VALUES(1, '1-1-2012', 'Sakib', 20000, '202', 'sam@some.com', 'Male', 1, 1, 1)
+
+INSERT INTO Employee(emp_id, join_date, emp_name, salary, designation, email, gender, zip_code, land_code, num_id)
+VALUES(1, '1-1-2012', 'Arif', 20000, '202', 'arif@some.com', 'Male', 1, 1, 1)
+
+INSERT INTO Employee(emp_id, join_date, emp_name, salary, designation, email, gender, zip_code, land_code, num_id)
+VALUES(1, '1-1-2012', 'Monsorul', 20000, '202', 'mon@some.com', 'Male', 3, 1, 2)
+
+
+CREATE TABLE Address (
+    zip_code int NOT NULL PRIMARY KEY, road_no INT, city VARCHAR(255), house_no INT
+)
+INSERT INTO(zip_code, road_no, city, house_no)
+VALUES(1, 1, 'Dhaka', 1)
+
+INSERT INTO(zip_code, road_no, city, house_no)
+VALUES(2, 1, 'Dhaka', 2)
+
+INSERT INTO(zip_code, road_no, city, house_no)
+VALUES(3, 1, 'Gazipur', 4)
+
+CREATE TABLE Grave(
+    land_code int NOT NULL PRIMARY KEY,
+    location VARCHAR(255), 
+    size varchar(255)
+)
+
+INSERT INTO Grave(Land_code, location, size)
+VALUES(1, 'Sreepur, Gazipur', '3/3')
+
+INSERT INTO Grave(Land_code, location, size)
+VALUES(2, 'Vula, Tangail', '3/3')
+INSERT INTO Grave(Land_code, location, size)
+VALUES(3, 'Sreepur, Gazipur', '3/3')
+
+
+CREATE TABLE PHONE(
+    Num_id INT NOT NULL PRIMARY KEY,
+    phone_no VARCHAR(255)
+)
+INSERT INTO PHONE(num_id, phone_no)
+VALUES(1, '019XXXXX')
+
+INSERT INTO PHONE(num_id, phone_no)
+VALUES(2, '019XXXXX')
+
+INSERT INTO PHONE(num_id, phone_no)
+VALUES(3, '019XXXXX')
